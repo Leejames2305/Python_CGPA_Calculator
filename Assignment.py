@@ -1,3 +1,7 @@
+import time
+
+
+# -------------------------------------------------STAFF----------------------------------------------------------
 def staff():
     print("\n1. Update Course Name")
     print("2. Update Credit Hours")
@@ -6,7 +10,8 @@ def staff():
     print("0. Quit")
     select_2 = int(input("\nSelect the service you required from the list above : "))
     if select_2 == 0:
-        print("Thanks for using")
+        print("Thanks for using me")
+        quit()
     elif select_2 == 1:
         Course_Name()
     elif select_2 == 2:
@@ -33,6 +38,7 @@ def Students_Results():
     print("Student results")
 
 
+# ------------------------------------------------STUDENT-----------------------------------------------------
 def Course():
     print("\nCore Course")
     print("Code        Course Name")
@@ -62,16 +68,31 @@ def Grade():
     Grade_Course_Code = []
     Grade_Grades = []
     Input_Grade_Course_Code = input("\nEnter the course code (Enter '0' to Exit) : ")
-    Input_Grade_Grades = input('Enter grade : ')
-    if Input_Grade_Course_Code in Core_Course_Code + Student_Stream_Code:  # Combine Core and Elective Course
-        if Input_Grade_Course_Code not in Grade_Course_Code:
-            Grade_Course_Code.append(Input_Grade_Course_Code)
-            Grade_Grades.append(Input_Grade_Grades)
+    while Input_Grade_Course_Code != '0':
+        if Input_Grade_Course_Code in Core_Course_Code + Student_Stream_Code:  # Combine Core and Elective Course
+            if Input_Grade_Course_Code not in Grade_Course_Code:
+                Input_Grade_Grades = input('Enter grade : ')
+                Grade_Course_Code.append(Input_Grade_Course_Code)
+                Grade_Grades.append(Input_Grade_Grades)
+                print(Grade_Course_Code)
+                print(Grade_Grades)
+            else:
+                print('This course Grade is already recorded in the system . ')
+                Update_Grade = input('Do you want to update the grade ? (Y/N) : ').upper()
+                if Update_Grade == 'Y':
+                    Overwrite_Course_List_Position = Grade_Course_Code.index(Input_Grade_Course_Code)
+                    Overwrite_Grade = input('Enter grade : ')
+                    Grade_Grades[Overwrite_Course_List_Position] = Overwrite_Grade
+
+            Input_Grade_Course_Code = input("\nEnter the course code (Enter '0' to Exit) : ")
+
         else:
-            print('This course Grade is already recorded in the system . ')
-    else:
-        print('\nYou do not have this course in your stream ! ')
-        Grade()
+            print('\nYou do not have this course in your stream ! ')
+            time.sleep(1)
+            Grade()
+    print('\nQuiting to main menu ... ')
+    time.sleep(1)
+    student()
 
 
 def Results():
@@ -93,7 +114,8 @@ def student():
     print("0. Quit")
     select_1 = int(input("\nSelect the service you required from the list above : "))
     if select_1 == 0:
-        print("Thanks for using")
+        print('\nThanks for using me ')
+        quit()
     elif select_1 == 1:
         Course()
     elif select_1 == 2:
@@ -104,6 +126,7 @@ def student():
         Other()
 
 
+# -----------------------------------------------------SYSTEM--------------------------------------------------------
 print("----------------------------------------------------------")
 print("              WELCOME TO THE CGPA CALCULATOR              ")
 print("----------------------------------------------------------")
@@ -114,7 +137,7 @@ while len(str(ID)) != 7:
     ID = (input("Please key in your Student ID : "))
 
 Core_Course_List = ['Effective Communication Skills', 'English for Academic Study', 'Mathematics I', 'Mathematics II',
-               'Mathematics III', 'Organic Chemistry', 'Physical Chemistry']
+                    'Mathematics III', 'Organic Chemistry', 'Physical Chemistry']
 Core_Course_Code = ['FHHM1022', 'FHEL1012', 'FHMM1014', 'FHMM1024', 'FHMM1034', 'FHSC1124', 'FHSC1114']
 
 Stream_1_Course_List = ['Fundamentals of Cell Biology', 'Inorganic Chemistry', 'Introduction to Physiological Systems',
