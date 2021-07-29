@@ -2,28 +2,58 @@ import time
 
 
 # -------------------------------------------------STAFF----------------------------------------------------------
-def staff():
-    print("\n1. Update Course Name")
-    print("2. Update Credit Hours")
-    print("3. Keep Students Details")
-    print("4. Update results of students")
-    print("0. Quit")
-    select_2 = int(input("\nSelect the service you required from the list above : "))
-    if select_2 == 0:
-        print("Thanks for using me")
-        quit()
-    elif select_2 == 1:
-        Course_Name()
-    elif select_2 == 2:
-        Credit_Hour()
-    elif select_2 == 3:
-        Students_Details()
-    elif select_2 == 4:
-        Students_Results()
-
-
 def Course_Name():
-    print("Course name")
+    Code_Or_Name = input("Would you like update the Course name based on Course Name(NAME)"
+                         " or Course Code(CODE) ? ").upper()
+    if Code_Or_Name == 'NAME':
+        Selected_Course_Name = input("Please enter the Course Name you want to update : ")
+        Replaced_Course_Name = input("Please enter the new name : ")
+        if Selected_Course_Name in Core_Course_List:
+            Core_Course_List[Core_Course_List.index(Selected_Course_Name)] = Replaced_Course_Name
+            print("\nDone")
+            time.sleep(0.5)
+        if Selected_Course_Name in Stream_1_Course_List:
+            Stream_1_Course_List[Stream_1_Course_List.index(Selected_Course_Name)] = Replaced_Course_Name
+            print("\nDone")
+            time.sleep(0.5)
+        if Selected_Course_Name in Stream_2_Course_List:
+            Stream_2_Course_List[Stream_2_Course_List.index(Selected_Course_Name)] = Replaced_Course_Name
+            print("\nDone")
+            time.sleep(0.5)
+        if Selected_Course_Name in Stream_3_Course_List:
+            Stream_3_Course_List[Stream_3_Course_List.index(Selected_Course_Name)] = Replaced_Course_Name
+            print("\nDone")
+            time.sleep(0.5)
+        else:
+            print('Invalid Course Name ! Please check again the name you key in (CAPS is important)')
+            Course_Name()
+        staff()
+    elif Code_Or_Name == 'CODE':
+        Selected_Course_Code = input("Please enter the Course Code of the course you want to update its name : ")
+        Replaced_Course_Name = input("Please enter the new name : ")
+        if Selected_Course_Code in Core_Course_Code:
+            Core_Course_List[Core_Course_Code.index(Selected_Course_Code)] = Replaced_Course_Name
+            print("\nDone")
+            time.sleep(0.5)
+        if Selected_Course_Code in Stream_1_Code_List:
+            Stream_1_Course_List[Stream_1_Code_List.index(Selected_Course_Code)] = Replaced_Course_Name
+            print("\nDone")
+            time.sleep(0.5)
+        if Selected_Course_Code in Stream_2_Code_List:
+            Stream_2_Course_List[Stream_2_Code_List.index(Selected_Course_Code)] = Replaced_Course_Name
+            print("\nDone")
+            time.sleep(0.5)
+        if Selected_Course_Code in Stream_3_Code_List:
+            Stream_3_Course_List[Stream_3_Code_List.index(Selected_Course_Code)] = Replaced_Course_Name
+            print("\nDone")
+            time.sleep(0.5)
+        else:
+            print('Invalid Code ! Please check again the name you key in (CAPS is important)')
+            Course_Name()
+        staff()
+    else:
+        print("Invalid selection. ")
+        Course_Name()
 
 
 def Credit_Hour():
@@ -31,11 +61,61 @@ def Credit_Hour():
 
 
 def Students_Details():
-    print("Student details")
+    print("Keep Student details is currently not available")
+    staff()
 
 
 def Students_Results():
-    print("Student results")
+    print("Update Students' results is currently not available")
+    staff()
+
+
+def List_All_Course():
+    print("\nCore Course")
+    print("Code        Course Name")
+    print("--------------------------------------------------------")
+    for i in range(1, len(Core_Course_List) + 1, 1):
+        print(*Core_Course_Code[i - 1:i], "  ", *Core_Course_List[i - 1:i])  # the * is to prevent it printing []
+    print("\nElective Course")
+    print("Code        Course Name")
+    print("--------------------------------------------------------")
+    print("\n Stream 1")
+    for i in range(1, len(Stream_1_Code_List) + 1, 1):
+        print(*Stream_1_Code_List[i - 1:i], "  ", *Stream_1_Course_List[i - 1:i])
+    print("\n Stream 2")
+    for i in range(1, len(Stream_2_Code_List) + 1, 1):
+        print(*Stream_2_Code_List[i - 1:i], "  ", *Stream_2_Course_List[i - 1:i])
+    print("\n Stream 3")
+    for i in range(1, len(Stream_3_Code_List) + 1, 1):
+        print(*Stream_3_Code_List[i - 1:i], "  ", *Stream_3_Course_List[i - 1:i])
+    time.sleep(0.5)
+    staff()
+
+
+def staff():
+    print("\n1. Update Course Name")
+    print("2. Update Credit Hours")
+    print("3. Keep Students Details")
+    print("4. Update Students' Result")
+    print("5. List down all the course")
+    print("0. Quit")
+    select_2 = input("\nSelect the service you required from the list above : ")
+    if select_2 == '0':
+        print('\nThanks for using me ')
+        login()
+    elif select_2 == '1':
+        Course_Name()
+    elif select_2 == '2':
+        Credit_Hour()
+    elif select_2 == '3':
+        Students_Details()
+    elif select_2 == '4':
+        Students_Results()
+    elif select_2 == '5':
+        List_All_Course()
+    else:
+        print('Please enter the options from 1 ~ 4 only')
+        staff()
 
 
 # ------------------------------------------------STUDENT-----------------------------------------------------
@@ -153,7 +233,7 @@ def student():
     select_1 = input("\nSelect the service you required from the list above : ")
     if select_1 == '0':
         print('\nThanks for using me ')
-        quit()
+        login()
     elif select_1 == '1':
         Course()
     elif select_1 == '2':
@@ -167,12 +247,8 @@ def student():
         student()
 
 
-# -----------------------------------------------------SYSTEM--------------------------------------------------------
-print("----------------------------------------------------------")
-print("              WELCOME TO THE CGPA CALCULATOR              ")
-print("----------------------------------------------------------")
+# -----------------------------------------------------Values--------------------------------------------------------
 
-ID = (input("Please key in your Student ID (Exp: 2103301) : "))
 
 Core_Course_List = ['Effective Communication Skills', 'English for Academic Study', 'Mathematics I', 'Mathematics II',
                     'Mathematics III', 'Organic Chemistry', 'Physical Chemistry']
@@ -182,30 +258,37 @@ Stream_1_Course_List = ['Fundamentals of Cell Biology', 'Inorganic Chemistry', '
                         'Modern Biology', 'Physics I', 'Physics II', 'Programming Concept']
 Stream_1_Code_List = ['FHSC1214', 'FHSC1134', 'FHSC1224', 'FHSC1234', 'FHSP1014', 'FHSP1024', 'FHCT1022']
 
-Stream_2_Course_List = ['Mechanics', ' Thermodynamics and Electromagnetism', 'Waves and Modern Physics',
+Stream_2_Course_List = ['Mechanics', 'Thermodynamics and Electromagnetism', 'Waves and Modern Physics',
                         'Inorganic Chemistry', 'Programming Concepts', 'Biology I', 'Biology II']
 Stream_2_Code_List = ['FHSC1014', 'FHSC1024', 'FHSC1034', 'FHSC1134', 'FHCT1022', 'FHSB1214', 'FHSB1224']
 
 Stream_3_Course_List = ['Computing Technology', 'Introduction to Data Analytics', 'Programming Concepts and Design',
                         'Management', 'Mechanics', 'Thermodynamics and Electromagnetism', 'Biology I']
-Stream_3_Code_List = ['FHSC1214', 'FHSC1134', 'FHSC1224', 'FHSC1234', 'FHSP1014', 'FHSP1024', 'FHCT1022']
+Stream_3_Code_List = ['FHCT1012', 'FHCT1014', 'FHCT1024', 'FHBM1114', 'FHSC1014', 'FHSC1024', 'FHSB1214']
 
 ID_list = ['2103301', '2103302', '2103303']  # 1st student ID = 2103301
 Name_list = ["Josh", "Jack", "Jason"]  # 1st student name = Josh
 Stream_list = ['1', '2', '3']  # 1st student stream = Stream 1
 
-while ID not in ID_list:  # Check whether this user's data is available or not
-    print("User ID can't be found in the database, please try again")
-    ID = (input("Please key in your Student ID (Exp: 2103301) : "))
-
-List_Position = ID_list.index(str(ID))  # Finding ID in the list and the index(position) of it in all list
-Name = Name_list[List_Position]
-Stream = Stream_list[List_Position]
-
 Grade_Course_Code = []
 Grade_Grades = []
 Grade_Course_Stream = []
 
+print("----------------------------------------------------------")
+print("              WELCOME TO THE CGPA CALCULATOR              ")
+print("----------------------------------------------------------")
+ID = input("Please key in your Student ID (Exp: 2103301) : ")
+
+while ID not in ID_list:  # Check whether this user's data is available or not
+    if ID == '1234567':
+        staff()
+    else:
+        print("User ID can't be found in the database, please try again")
+        ID = input("Please key in your Student ID (Exp: 2103301) : ")
+
+List_Position = ID_list.index(str(ID))  # Finding ID in the list and the index(position) of it in all list
+Name = Name_list[List_Position]
+Stream = Stream_list[List_Position]
 if Stream == '1':  # Determine which List should the data read from according to the correct Stream
     Student_Stream_Code = Stream_1_Code_List
     Student_Stream_Course = Stream_1_Course_List
@@ -215,8 +298,4 @@ elif Stream == '2':
 elif Stream == '3':
     Student_Stream_Code = Stream_3_Code_List
     Student_Stream_Course = Stream_3_Course_List
-
-if ID == 1234567:  # Staff ID login is 1234567
-    staff()
-else:
-    student()
+student()
