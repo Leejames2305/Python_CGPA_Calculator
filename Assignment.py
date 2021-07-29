@@ -65,15 +65,15 @@ def Grade():
     print("--------------------------------------------------------")
     for i in range(1, len(Student_Stream_Course) + 1, 1):
         print(*Student_Stream_Code[i - 1:i], "  ", *Student_Stream_Course[i - 1:i])
-    Grade_Course_Code = []
-    Grade_Grades = []
     Input_Grade_Course_Code = input("\nEnter the course code (Enter '0' to Exit) : ")
     while Input_Grade_Course_Code != '0':
         if Input_Grade_Course_Code in Core_Course_Code + Student_Stream_Code:  # Combine Core and Elective Course
             if Input_Grade_Course_Code not in Grade_Course_Code:
-                Input_Grade_Grades = input('Enter grade : ')
+                Input_Grade_Grades = input('Enter grade : ').upper()
                 Grade_Course_Code.append(Input_Grade_Course_Code)
                 Grade_Grades.append(Input_Grade_Grades)
+                Grade_Course_Stream_Position = (Core_Course_Code + Student_Stream_Code).index(Input_Grade_Course_Code)
+                Grade_Course_Stream.append((Core_Course_List + Student_Stream_Course)[Grade_Course_Stream_Position])
                 print(Grade_Course_Code)
                 print(Grade_Grades)
             else:
@@ -83,9 +83,7 @@ def Grade():
                     Overwrite_Course_List_Position = Grade_Course_Code.index(Input_Grade_Course_Code)
                     Overwrite_Grade = input('Enter grade : ')
                     Grade_Grades[Overwrite_Course_List_Position] = Overwrite_Grade
-
             Input_Grade_Course_Code = input("\nEnter the course code (Enter '0' to Exit) : ")
-
         else:
             print('\nYou do not have this course in your stream ! ')
             time.sleep(1)
@@ -96,11 +94,51 @@ def Grade():
 
 
 def Results():
-    print("Results")
+    if Grade_Course_Code:
+        Total_Credit_Hour = 0
+        Total_Point = 0
+        CGPA = 0
+        print("Code        Grades     Course Name")
+        print("--------------------------------------------------------")
+        for i in range(1, len(Grade_Course_Code) + 1, 1):
+            print(*Grade_Course_Code[i - 1:i], "  ", *Grade_Grades[i - 1:i], "        ", *Grade_Course_Stream[i - 1:i])
+            Total_Credit_Hour += int(str(Grade_Course_Code[i - 1])[-1:])
+            if 'A+' in Grade_Grades[i - 1:i] or 'A' in Grade_Grades[i - 1:i]:
+                Total_Point += 4
+            elif 'A-' in Grade_Grades[i - 1:i]:
+                Total_Point += 3.67
+            elif 'B+' in Grade_Grades[i - 1:i]:
+                Total_Point += 3.33
+            elif 'B' in Grade_Grades[i - 1:i]:
+                Total_Point += 3.00
+            elif 'B-' in Grade_Grades[i - 1:i]:
+                Total_Point += 2.67
+            elif 'C+' in Grade_Grades[i - 1:i]:
+                Total_Point += 2.33
+            elif 'C' in Grade_Grades[i - 1:i]:
+                Total_Point += 2.00
+            elif 'F' in Grade_Grades[i - 1:i]:
+                Total_Point += 0.00
+            else:
+                print("\nInvalid Grades detected", "---->", Grade_Grades[i - 1:i])
+                print("Please use the 'Update Grade Function to overwrite it' (Select 2 at main menu) ")
+                time.sleep(1)
+                student()
+            CGPA = Total_Point / i
+        print("\nTotal Credit Hour : ", Total_Credit_Hour)
+        print("CGPA : ", round(CGPA, 2))
+        input('\nPress Enter to go back to main menu')
+        student()
+    else:
+        print('\nThere is no grades being recorded')
+        input('Press "Enter" to go back to main menu')
+        student()
 
 
 def Other():
-    print("Other")
+    print("Coming Soon")
+    time.sleep(1)
+    student()
 
 
 def student():
@@ -112,18 +150,21 @@ def student():
     print("3. View Results")
     print("4. Other functions")
     print("0. Quit")
-    select_1 = int(input("\nSelect the service you required from the list above : "))
-    if select_1 == 0:
+    select_1 = input("\nSelect the service you required from the list above : ")
+    if select_1 == '0':
         print('\nThanks for using me ')
         quit()
-    elif select_1 == 1:
+    elif select_1 == '1':
         Course()
-    elif select_1 == 2:
+    elif select_1 == '2':
         Grade()
-    elif select_1 == 3:
+    elif select_1 == '3':
         Results()
-    elif select_1 == 4:
+    elif select_1 == '4':
         Other()
+    else:
+        print('Please enter the options from 1 ~ 4 only')
+        student()
 
 
 # -----------------------------------------------------SYSTEM--------------------------------------------------------
@@ -131,10 +172,7 @@ print("----------------------------------------------------------")
 print("              WELCOME TO THE CGPA CALCULATOR              ")
 print("----------------------------------------------------------")
 
-ID = (input("Please key in your Student ID : "))
-while len(str(ID)) != 7:
-    print("Invalid Student ID (Exp of correct Student ID: 2100111)")
-    ID = (input("Please key in your Student ID : "))
+ID = (input("Please key in your Student ID (Exp: 2103301) : "))
 
 Core_Course_List = ['Effective Communication Skills', 'English for Academic Study', 'Mathematics I', 'Mathematics II',
                     'Mathematics III', 'Organic Chemistry', 'Physical Chemistry']
@@ -158,10 +196,15 @@ Stream_list = ['1', '2', '3']  # 1st student stream = Stream 1
 
 while ID not in ID_list:  # Check whether this user's data is available or not
     print("User ID can't be found in the database, please try again")
-    ID = (input("Please key in your Student ID : "))
+    ID = (input("Please key in your Student ID (Exp: 2103301) : "))
+
 List_Position = ID_list.index(str(ID))  # Finding ID in the list and the index(position) of it in all list
 Name = Name_list[List_Position]
 Stream = Stream_list[List_Position]
+
+Grade_Course_Code = []
+Grade_Grades = []
+Grade_Course_Stream = []
 
 if Stream == '1':  # Determine which List should the data read from according to the correct Stream
     Student_Stream_Code = Stream_1_Code_List
