@@ -35,6 +35,7 @@ def Course_Name():
             Core_Course_List[Core_Course_Code.index(Selected_Course_Code)] = Replaced_Course_Name
             print("\nDone")
             time.sleep(0.5)
+            staff()
         if Selected_Course_Code in Stream_1_Code_List:
             Stream_1_Course_List[Stream_1_Code_List.index(Selected_Course_Code)] = Replaced_Course_Name
             print("\nDone")
@@ -51,22 +52,53 @@ def Course_Name():
             print('Invalid Code ! Please check again the name you key in (CAPS is important)')
             Course_Name()
         staff()
+
     else:
         print("Invalid selection. ")
         Course_Name()
 
 
 def Credit_Hour():
-    print("Credit hour")
+    Selected_Course_Code = input("Please enter the Course Code of the course you want to update its credit hour : ")
+    try:
+        Replaced_Credit_Hour = input("Please enter the new credit hour : ")
+        if Selected_Course_Code in Core_Course_Code:
+            Core_Course_Code[Core_Course_Code.index(Selected_Course_Code)] = \
+                (Core_Course_Code[Core_Course_Code.index(Selected_Course_Code)][0:7]) + Replaced_Credit_Hour
+            print("\nDone")
+            time.sleep(0.5)
+            staff()
+        if Selected_Course_Code in Stream_1_Code_List:
+            Stream_1_Code_List[Stream_1_Code_List.index(Selected_Course_Code)] = \
+                (Stream_1_Code_List[Stream_1_Code_List.index(Selected_Course_Code)][0:7]) + Replaced_Credit_Hour
+            print("\nDone")
+            time.sleep(0.5)
+        if Selected_Course_Code in Stream_2_Code_List:
+            Stream_2_Code_List[Stream_2_Code_List.index(Selected_Course_Code)] = \
+                (Stream_2_Code_List[Stream_2_Code_List.index(Selected_Course_Code)][0:7]) + Replaced_Credit_Hour
+            print("\nDone")
+            time.sleep(0.5)
+        if Selected_Course_Code in Stream_3_Code_List:
+            Stream_3_Code_List[Stream_3_Code_List.index(Selected_Course_Code)] = \
+                (Stream_3_Code_List[Stream_3_Code_List.index(Selected_Course_Code)][0:7]) + Replaced_Credit_Hour
+            print("\nDone")
+            time.sleep(0.5)
+        else:
+            print('Invalid Code ! Please check again the name you key in (CAPS is important)')
+            Credit_Hour()
+        staff()
+
+    except ValueError:
+        print("That isn't a integer")
 
 
 def Students_Details():
-    print("Keep Student details is currently not available")
+    print("\nKeep Student details is currently not available")
     staff()
 
 
 def Students_Results():
-    print("Update Students' results is currently not available")
+    print("\nUpdate Students' results is currently not available")
     staff()
 
 
@@ -102,7 +134,7 @@ def staff():
     select_2 = input("\nSelect the service you required from the list above : ")
     if select_2 == '0':
         print('\nThanks for using me ')
-        login()
+        quit()
     elif select_2 == '1':
         Course_Name()
     elif select_2 == '2':
@@ -233,7 +265,7 @@ def student():
     select_1 = input("\nSelect the service you required from the list above : ")
     if select_1 == '0':
         print('\nThanks for using me ')
-        login()
+        quit()
     elif select_1 == '1':
         Course()
     elif select_1 == '2':
