@@ -1,13 +1,3 @@
-print("----------------------------------------------------------")
-print("              WELCOME TO THE CGPA CALCULATOR              ")
-print("----------------------------------------------------------")
-
-ID = int(input("Please key in your Student ID : "))
-while len(str(ID)) != 7:
-    print("Invalid Student ID (Exp of correct Student ID: 2100111)")
-    ID = int(input("Please key in your Student ID : "))
-
-
 def staff():
     print("\n1. Update Course Name")
     print("2. Update Credit Hours")
@@ -44,14 +34,48 @@ def Students_Results():
 
 
 def Course():
+    print("\nCore Course")
     print("Code        Course Name")
     print("--------------------------------------------------------")
-    for i in range(1, 8, 1):
-        print(*course_Code[i-1:i], "  ", *course_List[i-1:i])
+    for i in range(1, len(Core_Course_List) + 1, 1):
+        print(*Core_Course_Code[i - 1:i], "  ", *Core_Course_List[i - 1:i])  # the * is to prevent it printing []
+    print("\nElective Course")
+    print("Code        Course Name")
+    print("--------------------------------------------------------")
+    for i in range(1, len(Student_Stream_Course) + 1, 1):
+        print(*Student_Stream_Code[i - 1:i], "  ", *Student_Stream_Course[i - 1:i])
+    input('\nPress Enter to continue')
+    student()
 
 
 def Grade():
-    print("Grade")
+    print("\nCore Course")
+    print("Code        Course Name")
+    print("--------------------------------------------------------")
+    for i in range(1, len(Core_Course_List) + 1, 1):
+        print(*Core_Course_Code[i - 1:i], "  ", *Core_Course_List[i - 1:i])  # the * is to prevent it printing '[]'
+    print("\nElective Course")
+    print("Code        Course Name")
+    print("--------------------------------------------------------")
+    for i in range(1, len(Student_Stream_Course) + 1, 1):
+        print(*Student_Stream_Code[i - 1:i], "  ", *Student_Stream_Course[i - 1:i])
+    Grade_Course_Code = []
+    Grade_Grades = []
+    Input_Grade_Course_Code = input("\nEnter the course code (Enter '0' to Exit) : ")
+    Input_Grade_Grades = input('Enter grade : ')
+    print(Input_Grade_Course_Code)
+    print(Core_Course_Code)
+    print(Student_Stream_Code)
+    if Input_Grade_Course_Code in Core_Course_Code and Input_Grade_Course_Code in Student_Stream_Code:
+        print("Test")
+        # if Input_Grade_Course_Code not in Grade_Course_Code:
+        #     Grade_Course_Code.append(Input_Grade_Course_Code)
+        #     Grade_Grades.append(Input_Grade_Grades)
+        # else:
+        #     print('This course Grade is already recorded in the system . ')
+    else:
+        print('\nYou do not have this course in your stream ! ')
+        Grade()
 
 
 def Results():
@@ -84,13 +108,50 @@ def student():
         Other()
 
 
-course_List = [' Effective Communication Skills', 'English for Academic Study', 'Mathematics I', 'Mathematics II', 'Mathematics III', 'Organic Chemistry', 'Physical Chemistry']
-course_Code = ['FHHM1022', 'FHEL1012', 'FHMM1014', 'FHMM1024', 'FHMM1034', 'FHSC1124', 'FHSC1114']
+print("----------------------------------------------------------")
+print("              WELCOME TO THE CGPA CALCULATOR              ")
+print("----------------------------------------------------------")
 
-Name = "Unknown"
-Stream = "Unknown"
+ID = int(input("Please key in your Student ID : "))
+while len(str(ID)) != 7:
+    print("Invalid Student ID (Exp of correct Student ID: 2100111)")
+    ID = int(input("Please key in your Student ID : "))
 
-if ID == 1234567:
+Core_Course_List = ['Effective Communication Skills', 'English for Academic Study', 'Mathematics I', 'Mathematics II',
+               'Mathematics III', 'Organic Chemistry', 'Physical Chemistry']
+Core_Course_Code = ['FHHM1022', 'FHEL1012', 'FHMM1014', 'FHMM1024', 'FHMM1034', 'FHSC1124', 'FHSC1114']
+
+Stream_1_Course_List = ['Fundamentals of Cell Biology', 'Inorganic Chemistry', 'Introduction to Physiological Systems',
+                        'Modern Biology', 'Physics I', 'Physics II', 'Programming Concept']
+Stream_1_Code_List = ['FHSC1214', 'FHSC1134', 'FHSC1224', 'FHSC1234', 'FHSP1014', 'FHSP1024', 'FHCT1022']
+
+Stream_2_Course_List = ['Mechanics', ' Thermodynamics and Electromagnetism', 'Waves and Modern Physics',
+                        'Inorganic Chemistry', 'Programming Concepts', 'Biology I', 'Biology II']
+Stream_2_Code_List = ['FHSC1014', 'FHSC1024', 'FHSC1034', 'FHSC1134', 'FHCT1022', 'FHSB1214', 'FHSB1224']
+
+Stream_3_Course_List = ['Computing Technology', 'Introduction to Data Analytics', 'Programming Concepts and Design',
+                        'Management', 'Mechanics', 'Thermodynamics and Electromagnetism', 'Biology I']
+Stream_3_Code_List = ['FHSC1214', 'FHSC1134', 'FHSC1224', 'FHSC1234', 'FHSP1014', 'FHSP1024', 'FHCT1022']
+
+ID_list = ['2103301', '2103302', '2103303']  # 1st student ID = 2103301
+Name_list = ["Josh", "Jack", "Jason"]  # 1st student name = Josh
+Stream_list = ['1', '2', '3']  # 1st student stream = Stream 1
+
+List_Position = ID_list.index(str(ID))  # Finding ID in the list and the index(position) of it in all list
+Name = Name_list[List_Position]
+Stream = Stream_list[List_Position]
+
+if Stream == '1':  # Determine which List should the data read from according to the correct Stream
+    Student_Stream_Code = Stream_1_Code_List
+    Student_Stream_Course = Stream_1_Course_List
+elif Stream == '2':
+    Student_Stream_Code = Stream_2_Code_List
+    Student_Stream_Course = Stream_2_Course_List
+elif Stream == '3':
+    Student_Stream_Code = Stream_3_Code_List
+    Student_Stream_Course = Stream_3_Course_List
+
+if ID == 1234567:  # Staff ID login is 1234567
     staff()
 else:
     student()
