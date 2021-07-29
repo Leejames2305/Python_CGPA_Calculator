@@ -108,10 +108,10 @@ print("----------------------------------------------------------")
 print("              WELCOME TO THE CGPA CALCULATOR              ")
 print("----------------------------------------------------------")
 
-ID = int(input("Please key in your Student ID : "))
+ID = (input("Please key in your Student ID : "))
 while len(str(ID)) != 7:
     print("Invalid Student ID (Exp of correct Student ID: 2100111)")
-    ID = int(input("Please key in your Student ID : "))
+    ID = (input("Please key in your Student ID : "))
 
 Core_Course_List = ['Effective Communication Skills', 'English for Academic Study', 'Mathematics I', 'Mathematics II',
                'Mathematics III', 'Organic Chemistry', 'Physical Chemistry']
@@ -133,6 +133,9 @@ ID_list = ['2103301', '2103302', '2103303']  # 1st student ID = 2103301
 Name_list = ["Josh", "Jack", "Jason"]  # 1st student name = Josh
 Stream_list = ['1', '2', '3']  # 1st student stream = Stream 1
 
+while ID not in ID_list:  # Check whether this user's data is available or not
+    print("User ID can't be found in the database, please try again")
+    ID = (input("Please key in your Student ID : "))
 List_Position = ID_list.index(str(ID))  # Finding ID in the list and the index(position) of it in all list
 Name = Name_list[List_Position]
 Stream = Stream_list[List_Position]
