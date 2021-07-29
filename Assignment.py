@@ -63,16 +63,12 @@ def Grade():
     Grade_Grades = []
     Input_Grade_Course_Code = input("\nEnter the course code (Enter '0' to Exit) : ")
     Input_Grade_Grades = input('Enter grade : ')
-    print(Input_Grade_Course_Code)
-    print(Core_Course_Code)
-    print(Student_Stream_Code)
-    if Input_Grade_Course_Code in Core_Course_Code and Input_Grade_Course_Code in Student_Stream_Code:
-        print("Test")
-        # if Input_Grade_Course_Code not in Grade_Course_Code:
-        #     Grade_Course_Code.append(Input_Grade_Course_Code)
-        #     Grade_Grades.append(Input_Grade_Grades)
-        # else:
-        #     print('This course Grade is already recorded in the system . ')
+    if Input_Grade_Course_Code in Core_Course_Code + Student_Stream_Code:  # Combine Core and Elective Course
+        if Input_Grade_Course_Code not in Grade_Course_Code:
+            Grade_Course_Code.append(Input_Grade_Course_Code)
+            Grade_Grades.append(Input_Grade_Grades)
+        else:
+            print('This course Grade is already recorded in the system . ')
     else:
         print('\nYou do not have this course in your stream ! ')
         Grade()
