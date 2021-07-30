@@ -135,10 +135,10 @@ def staff():
     print("3. Keep Students Details")
     print("4. Update Students' Result")
     print("5. List down all the course")
-    print("0. Quit")
+    print("0. Log Out")
     select_2 = input("\nSelect the service you required from the list above : ")
     if select_2 == '0':
-        print('\nThanks for using me ')
+        print('\nLogging Out ... ')
         login()
     elif select_2 == '1':
         Course_Name()
@@ -263,11 +263,11 @@ def student():
     print("\n1. View Course List")
     print("2. Enter or Update Grade")
     print("3. View Results")
-    print("4. Other functions")
-    print("0. Quit")
+    print("4. Other Functions")
+    print("0. Log Out")
     select_1 = input("\nSelect the service you required from the list above : ")
     if select_1 == '0':
-        print('\nThanks for using me ')
+        print('\nLogging Out .... ')
         login()
     elif select_1 == '1':
         Course()
@@ -285,7 +285,6 @@ def student():
 def login():
     global ID
     ID = input("Please key in your Student ID (Exp: 2103301) : ")
-    print(ID)
     check()
 
 
@@ -342,37 +341,15 @@ Grade_Course_Code = []
 Grade_Grades = []
 Grade_Course_Stream = []
 
-
-print("----------------------------------------------------------")
-print("              WELCOME TO THE CGPA CALCULATOR              ")
-print("----------------------------------------------------------")
 ID = []
 List_Position = []
 Name = []
 Stream = []
 Student_Stream_Code = []
 Student_Stream_Course = []
+
+# -----------------------------------------------------------SYSTEM----------------------------------------------------
+print("----------------------------------------------------------")
+print("              WELCOME TO THE CGPA CALCULATOR              ")
+print("----------------------------------------------------------")
 login()
-
-
-# while ID not in ID_list:  # Check whether this user's data is available or not
-#     if ID == '1234567':
-#         staff()
-#     else:
-#         print("User ID can't be found in the database, please try again")
-#         ID = input("Please key in your Student ID (Exp: 2103301) : ")
-
-
-# List_Position = ID_list.index(str(ID))  # Finding ID in the list and the index(position) of it in all list
-# Name = Name_list[List_Position]
-# Stream = Stream_list[List_Position]
-
-# if Stream == '1':  # Determine which List should the data read from according to the correct Stream
-#     Student_Stream_Code = Stream_1_Code_List
-#     Student_Stream_Course = Stream_1_Course_List
-# elif Stream == '2':
-#     Student_Stream_Code = Stream_2_Code_List
-#     Student_Stream_Course = Stream_2_Course_List
-# elif Stream == '3':
-#     Student_Stream_Code = Stream_3_Code_List
-#     Student_Stream_Course = Stream_3_Course_List
