@@ -98,7 +98,24 @@ def Credit_Hour():
 
 
 def Students_Details():
-    print("\nKeep Student details is currently not available")
+    New_Student_ID = input("Enter the new student's ID : ")
+    while len(New_Student_ID) != 7:
+        print("Invalid ID ! (Exp: 2103301) ")
+        New_Student_ID = input("Enter the new student's ID : ")
+    New_Student_Name = input("Enter the new student's name : ")
+    try:
+        New_Student_Stream = input("Enter the new student's stream : ")
+    except ValueError:
+        print("That isn't an integer ! ")
+        New_Student_Stream = 1
+        Students_Details()
+    print("Stream =", New_Student_Stream)
+    while New_Student_Stream not in Stream_List:
+        print("There is only 3 Stream currently (1, 2 or 3) ! ")
+        New_Student_Stream = input("Enter the new student's stream : ")
+    ID_List.append(New_Student_ID)
+    Name_List.append(New_Student_Name)
+    Stream_List.append(str(New_Student_Stream))
     staff()
 
 
@@ -132,7 +149,7 @@ def List_All_Course():
 def staff():
     print("\n1. Update Course Name")
     print("2. Update Credit Hours")
-    print("3. Keep Students Details")
+    print("3. Import Students Details")
     print("4. Update Students' Result")
     print("5. List down all the course")
     print("0. Log Out")
@@ -295,15 +312,15 @@ def check():
     global List_Position
     global Student_Stream_Code
     global Student_Stream_Course
-    while ID not in ID_list:  # Check whether this user's data is available or not
+    while ID not in ID_List:  # Check whether this user's data is available or not
         if ID == '1234567':
             staff()
         else:
             print("User ID can't be found in the database, please try again")
             ID = input("Please key in your Student ID (Exp: 2103301) : ")
-    List_Position = ID_list.index(str(ID))  # Finding ID in the list and the index(position) of it in all list
-    Name = Name_list[List_Position]
-    Stream = Stream_list[List_Position]
+    List_Position = ID_List.index(str(ID))  # Finding ID in the list and the index(position) of it in all list
+    Name = Name_List[List_Position]
+    Stream = Stream_List[List_Position]
     if Stream == '1':  # Determine which List should the data read from according to the correct Stream
         Student_Stream_Code = Stream_1_Code_List
         Student_Stream_Course = Stream_1_Course_List
@@ -333,9 +350,9 @@ Stream_3_Course_List = ['Computing Technology', 'Introduction to Data Analytics'
                         'Management', 'Mechanics', 'Thermodynamics and Electromagnetism', 'Biology I']
 Stream_3_Code_List = ['FHCT1012', 'FHCT1014', 'FHCT1024', 'FHBM1114', 'FHSC1014', 'FHSC1024', 'FHSB1214']
 
-ID_list = ['2103301', '2103302', '2103303']  # 1st student ID = 2103301
-Name_list = ["Josh", "Jack", "Jason"]  # 1st student name = Josh
-Stream_list = ['1', '2', '3']  # 1st student stream = Stream 1
+ID_List = ['2103301', '2103302', '2103303']  # 1st student ID = 2103301
+Name_List = ["Josh", "Jack", "Jason"]  # 1st student name = Josh
+Stream_List = ['1', '2', '3']  # 1st student stream = Stream 1
 
 Grade_Course_Code = []
 Grade_Grades = []
