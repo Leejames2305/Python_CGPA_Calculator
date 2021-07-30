@@ -64,24 +64,27 @@ def Credit_Hour():
         Replaced_Credit_Hour = int(input("Please enter the new credit hour : "))
         if 0 < Replaced_Credit_Hour < 10:
             if Selected_Course_Code in Core_Course_Code:
-                Core_Course_Code[Core_Course_Code.index(Selected_Course_Code)] =\
+                Core_Course_Code[Core_Course_Code.index(Selected_Course_Code)] = \
                     (Core_Course_Code[Core_Course_Code.index(Selected_Course_Code)][0:7]) + str(Replaced_Credit_Hour)
                 print("\nDone")
                 time.sleep(0.5)
                 staff()
             if Selected_Course_Code in Stream_1_Code_List:
-                Stream_1_Code_List[Stream_1_Code_List.index(Selected_Course_Code)] =\
-                    (Stream_1_Code_List[Stream_1_Code_List.index(Selected_Course_Code)][0:7]) + str(Replaced_Credit_Hour)
+                Stream_1_Code_List[Stream_1_Code_List.index(Selected_Course_Code)] = \
+                    (Stream_1_Code_List[Stream_1_Code_List.index(Selected_Course_Code)][0:7]) + str(
+                        Replaced_Credit_Hour)
                 print("\nDone")
                 time.sleep(0.5)
             if Selected_Course_Code in Stream_2_Code_List:
-                Stream_2_Code_List[Stream_2_Code_List.index(Selected_Course_Code)] =\
-                    (Stream_2_Code_List[Stream_2_Code_List.index(Selected_Course_Code)][0:7]) + str(Replaced_Credit_Hour)
+                Stream_2_Code_List[Stream_2_Code_List.index(Selected_Course_Code)] = \
+                    (Stream_2_Code_List[Stream_2_Code_List.index(Selected_Course_Code)][0:7]) + str(
+                        Replaced_Credit_Hour)
                 print("\nDone")
                 time.sleep(0.5)
             if Selected_Course_Code in Stream_3_Code_List:
-                Stream_3_Code_List[Stream_3_Code_List.index(Selected_Course_Code)] =\
-                    (Stream_3_Code_List[Stream_3_Code_List.index(Selected_Course_Code)][0:7]) + str(Replaced_Credit_Hour)
+                Stream_3_Code_List[Stream_3_Code_List.index(Selected_Course_Code)] = \
+                    (Stream_3_Code_List[Stream_3_Code_List.index(Selected_Course_Code)][0:7]) + str(
+                        Replaced_Credit_Hour)
                 print("\nDone")
                 time.sleep(0.5)
             else:
@@ -136,7 +139,7 @@ def staff():
     select_2 = input("\nSelect the service you required from the list above : ")
     if select_2 == '0':
         print('\nThanks for using me ')
-        quit()
+        login()
     elif select_2 == '1':
         Course_Name()
     elif select_2 == '2':
@@ -148,7 +151,7 @@ def staff():
     elif select_2 == '5':
         List_All_Course()
     else:
-        print('Please enter the options from 1 ~ 4 only')
+        print('Please enter the options from 1 ~ 5 only')
         staff()
 
 
@@ -265,7 +268,7 @@ def student():
     select_1 = input("\nSelect the service you required from the list above : ")
     if select_1 == '0':
         print('\nThanks for using me ')
-        quit()
+        login()
     elif select_1 == '1':
         Course()
     elif select_1 == '2':
@@ -279,6 +282,39 @@ def student():
         student()
 
 
+def login():
+    global ID
+    ID = input("Please key in your Student ID (Exp: 2103301) : ")
+    print(ID)
+    check()
+
+
+def check():
+    global ID
+    global Name
+    global Stream
+    global List_Position
+    global Student_Stream_Code
+    global Student_Stream_Course
+    while ID not in ID_list:  # Check whether this user's data is available or not
+        if ID == '1234567':
+            staff()
+        else:
+            print("User ID can't be found in the database, please try again")
+            ID = input("Please key in your Student ID (Exp: 2103301) : ")
+    List_Position = ID_list.index(str(ID))  # Finding ID in the list and the index(position) of it in all list
+    Name = Name_list[List_Position]
+    Stream = Stream_list[List_Position]
+    if Stream == '1':  # Determine which List should the data read from according to the correct Stream
+        Student_Stream_Code = Stream_1_Code_List
+        Student_Stream_Course = Stream_1_Course_List
+    elif Stream == '2':
+        Student_Stream_Code = Stream_2_Code_List
+        Student_Stream_Course = Stream_2_Course_List
+    elif Stream == '3':
+        Student_Stream_Code = Stream_3_Code_List
+        Student_Stream_Course = Stream_3_Course_List
+    student()
 # -----------------------------------------------------Values--------------------------------------------------------
 
 
@@ -306,28 +342,37 @@ Grade_Course_Code = []
 Grade_Grades = []
 Grade_Course_Stream = []
 
+
 print("----------------------------------------------------------")
 print("              WELCOME TO THE CGPA CALCULATOR              ")
 print("----------------------------------------------------------")
-ID = input("Please key in your Student ID (Exp: 2103301) : ")
+ID = []
+List_Position = []
+Name = []
+Stream = []
+Student_Stream_Code = []
+Student_Stream_Course = []
+login()
 
-while ID not in ID_list:  # Check whether this user's data is available or not
-    if ID == '1234567':
-        staff()
-    else:
-        print("User ID can't be found in the database, please try again")
-        ID = input("Please key in your Student ID (Exp: 2103301) : ")
 
-List_Position = ID_list.index(str(ID))  # Finding ID in the list and the index(position) of it in all list
-Name = Name_list[List_Position]
-Stream = Stream_list[List_Position]
-if Stream == '1':  # Determine which List should the data read from according to the correct Stream
-    Student_Stream_Code = Stream_1_Code_List
-    Student_Stream_Course = Stream_1_Course_List
-elif Stream == '2':
-    Student_Stream_Code = Stream_2_Code_List
-    Student_Stream_Course = Stream_2_Course_List
-elif Stream == '3':
-    Student_Stream_Code = Stream_3_Code_List
-    Student_Stream_Course = Stream_3_Course_List
-student()
+# while ID not in ID_list:  # Check whether this user's data is available or not
+#     if ID == '1234567':
+#         staff()
+#     else:
+#         print("User ID can't be found in the database, please try again")
+#         ID = input("Please key in your Student ID (Exp: 2103301) : ")
+
+
+# List_Position = ID_list.index(str(ID))  # Finding ID in the list and the index(position) of it in all list
+# Name = Name_list[List_Position]
+# Stream = Stream_list[List_Position]
+
+# if Stream == '1':  # Determine which List should the data read from according to the correct Stream
+#     Student_Stream_Code = Stream_1_Code_List
+#     Student_Stream_Course = Stream_1_Course_List
+# elif Stream == '2':
+#     Student_Stream_Code = Stream_2_Code_List
+#     Student_Stream_Course = Stream_2_Course_List
+# elif Stream == '3':
+#     Student_Stream_Code = Stream_3_Code_List
+#     Student_Stream_Course = Stream_3_Course_List
