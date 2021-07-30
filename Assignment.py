@@ -61,33 +61,35 @@ def Course_Name():
 def Credit_Hour():
     Selected_Course_Code = input("Please enter the Course Code of the course you want to update its credit hour : ")
     try:
-        Replaced_Credit_Hour = input("Please enter the new credit hour : ")
-        if Selected_Course_Code in Core_Course_Code:
-            Core_Course_Code[Core_Course_Code.index(Selected_Course_Code)] = \
-                (Core_Course_Code[Core_Course_Code.index(Selected_Course_Code)][0:7]) + Replaced_Credit_Hour
-            print("\nDone")
-            time.sleep(0.5)
+        Replaced_Credit_Hour = int(input("Please enter the new credit hour : "))
+        if 0 < Replaced_Credit_Hour < 10:
+            if Selected_Course_Code in Core_Course_Code:
+                Core_Course_Code[Core_Course_Code.index(Selected_Course_Code)] =\
+                    (Core_Course_Code[Core_Course_Code.index(Selected_Course_Code)][0:7]) + str(Replaced_Credit_Hour)
+                print("\nDone")
+                time.sleep(0.5)
+                staff()
+            if Selected_Course_Code in Stream_1_Code_List:
+                Stream_1_Code_List[Stream_1_Code_List.index(Selected_Course_Code)] =\
+                    (Stream_1_Code_List[Stream_1_Code_List.index(Selected_Course_Code)][0:7]) + str(Replaced_Credit_Hour)
+                print("\nDone")
+                time.sleep(0.5)
+            if Selected_Course_Code in Stream_2_Code_List:
+                Stream_2_Code_List[Stream_2_Code_List.index(Selected_Course_Code)] =\
+                    (Stream_2_Code_List[Stream_2_Code_List.index(Selected_Course_Code)][0:7]) + str(Replaced_Credit_Hour)
+                print("\nDone")
+                time.sleep(0.5)
+            if Selected_Course_Code in Stream_3_Code_List:
+                Stream_3_Code_List[Stream_3_Code_List.index(Selected_Course_Code)] =\
+                    (Stream_3_Code_List[Stream_3_Code_List.index(Selected_Course_Code)][0:7]) + str(Replaced_Credit_Hour)
+                print("\nDone")
+                time.sleep(0.5)
+            else:
+                print('Invalid Code ! Please check again the name you key in (CAPS is important)')
+                Credit_Hour()
             staff()
-        if Selected_Course_Code in Stream_1_Code_List:
-            Stream_1_Code_List[Stream_1_Code_List.index(Selected_Course_Code)] = \
-                (Stream_1_Code_List[Stream_1_Code_List.index(Selected_Course_Code)][0:7]) + Replaced_Credit_Hour
-            print("\nDone")
-            time.sleep(0.5)
-        if Selected_Course_Code in Stream_2_Code_List:
-            Stream_2_Code_List[Stream_2_Code_List.index(Selected_Course_Code)] = \
-                (Stream_2_Code_List[Stream_2_Code_List.index(Selected_Course_Code)][0:7]) + Replaced_Credit_Hour
-            print("\nDone")
-            time.sleep(0.5)
-        if Selected_Course_Code in Stream_3_Code_List:
-            Stream_3_Code_List[Stream_3_Code_List.index(Selected_Course_Code)] = \
-                (Stream_3_Code_List[Stream_3_Code_List.index(Selected_Course_Code)][0:7]) + Replaced_Credit_Hour
-            print("\nDone")
-            time.sleep(0.5)
         else:
-            print('Invalid Code ! Please check again the name you key in (CAPS is important)')
-            Credit_Hour()
-        staff()
-
+            print("Value should be between 1 ~ 9 only ! ")
     except ValueError:
         print("That isn't a integer")
 
@@ -186,8 +188,6 @@ def Grade():
                 Grade_Grades.append(Input_Grade_Grades)
                 Grade_Course_Stream_Position = (Core_Course_Code + Student_Stream_Code).index(Input_Grade_Course_Code)
                 Grade_Course_Stream.append((Core_Course_List + Student_Stream_Course)[Grade_Course_Stream_Position])
-                print(Grade_Course_Code)
-                print(Grade_Grades)
             else:
                 print('This course Grade is already recorded in the system . ')
                 Update_Grade = input('Do you want to update the grade ? (Y/N) : ').upper()
