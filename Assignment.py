@@ -146,12 +146,19 @@ def List_All_Course():
     staff()
 
 
+def List_All_Students():
+    print("All Students' Name : ", Name_List)
+    print("All Students' ID : ", ID_List)
+    print("All Students' Stream : ", Stream_List)
+
+
 def staff():
     print("\n1. Update Course Name")
     print("2. Update Credit Hours")
     print("3. Import Students Details")
     print("4. Update Students' Result")
     print("5. List down all the course")
+    print("6. List down all the students' details")
     print("0. Log Out")
     select_2 = input("\nSelect the service you required from the list above : ")
     if select_2 == '0':
@@ -167,6 +174,8 @@ def staff():
         Students_Results()
     elif select_2 == '5':
         List_All_Course()
+    elif select_2 == '6':
+        List_All_Students()
     else:
         print('Please enter the options from 1 ~ 5 only')
         staff()
