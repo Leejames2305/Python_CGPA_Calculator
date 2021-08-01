@@ -212,7 +212,7 @@ def Grade():
     while Input_Grade_Course_Code != '0':
         if Input_Grade_Course_Code in Core_Course_Code + Student_Stream_Code:  # Combine Core and Elective Course
             if Input_Grade_Course_Code not in Grade_Course_Code:
-                Input_Grade_Grades = input('Enter grade : ').upper()
+                Input_Grade_Grades = input('Enter grade (Exp: A+, B, C, F) : ').upper()
                 Grade_Course_Code.append(Input_Grade_Course_Code)
                 Grade_Grades.append(Input_Grade_Grades)
                 Grade_Course_Stream_Position = (Core_Course_Code + Student_Stream_Code).index(Input_Grade_Course_Code)
@@ -222,7 +222,7 @@ def Grade():
                 Update_Grade = input('Do you want to update the grade ? (Y/N) : ').upper()
                 if Update_Grade == 'Y':
                     Overwrite_Course_List_Position = Grade_Course_Code.index(Input_Grade_Course_Code)
-                    Overwrite_Grade = input('Enter grade : ')
+                    Overwrite_Grade = input('Enter grade (Exp: A+, B, C, F) : ')
                     Grade_Grades[Overwrite_Course_List_Position] = Overwrite_Grade
             Input_Grade_Course_Code = input("\nEnter the course code (Enter '0' to Exit) : ")
         else:
@@ -310,8 +310,12 @@ def student():
 
 def login():
     global ID
-    ID = input("Please key in your Student ID (Exp: 2103301) : ")
-    check()
+    ID = input("Please key in your Student ID (Exp: 2103301) [Enter '0' to quit] : ")
+    if ID == '0':
+        print('\nThank you for using me, hope you have a great day ! ')
+        quit()
+    else:
+        check()
 
 
 def check():
