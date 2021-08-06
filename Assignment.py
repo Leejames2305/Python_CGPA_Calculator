@@ -95,7 +95,7 @@ def Credit_Hour():
         else:
             print("Value should be between 1 ~ 9 only ! ")
     except ValueError:
-        print("That isn't a integer")
+        print("That isn't an integer")
 
 
 def Students_Details():
@@ -318,6 +318,7 @@ def login():
     ID = input("Please key in your Student ID (Exp: 2103301) [Enter '0' to quit] : ")
     if ID == '0':
         print('\nThank you for using me, hope you have a great day ! ')
+        time.sleep(1.5)
         quit()
     else:
         check()
@@ -335,6 +336,7 @@ def check():
             staff()
         elif ID == '0':
             print('\nThank you for using me, hope you have a great day ! ')
+            time.sleep(1.5)
             quit()
         else:
             print("User ID can't be found in the database, please try again")
