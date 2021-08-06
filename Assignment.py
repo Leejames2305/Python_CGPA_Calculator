@@ -8,6 +8,10 @@ def Course_Name():
     if Code_Or_Name == 'NAME':
         Selected_Course_Name = input("Please enter the Course Name you want to update : ")
         Replaced_Course_Name = input("Please enter the new name : ")
+        if Selected_Course_Name not in Core_Course_List + Stream_1_Course_List + Stream_2_Course_List \
+                + Stream_3_Course_List:
+            print('Invalid Course Name ! Please check again the name you key in (CAPS is important)')
+            Course_Name()
         if Selected_Course_Name in Core_Course_List:
             Core_Course_List[Core_Course_List.index(Selected_Course_Name)] = Replaced_Course_Name
             print("\nDone")
@@ -24,13 +28,13 @@ def Course_Name():
             Stream_3_Course_List[Stream_3_Course_List.index(Selected_Course_Name)] = Replaced_Course_Name
             print("\nDone")
             time.sleep(0.5)
-        else:
-            print('Invalid Course Name ! Please check again the name you key in (CAPS is important)')
-            Course_Name()
         staff()
     elif Code_Or_Name == 'CODE':
         Selected_Course_Code = input("Please enter the Course Code of the course you want to update its name : ")
         Replaced_Course_Name = input("Please enter the new name : ")
+        if Selected_Course_Code not in Core_Course_Code + Stream_1_Code_List + Stream_2_Code_List + Stream_3_Code_List:
+            print('Invalid Code ! Please check again the name you key in (CAPS is important)')
+            Course_Name()
         if Selected_Course_Code in Core_Course_Code:
             Core_Course_List[Core_Course_Code.index(Selected_Course_Code)] = Replaced_Course_Name
             print("\nDone")
@@ -48,9 +52,6 @@ def Course_Name():
             Stream_3_Course_List[Stream_3_Code_List.index(Selected_Course_Code)] = Replaced_Course_Name
             print("\nDone")
             time.sleep(0.5)
-        else:
-            print('Invalid Code ! Please check again the name you key in (CAPS is important)')
-            Course_Name()
         staff()
 
     else:
@@ -63,6 +64,9 @@ def Credit_Hour():
     try:
         Replaced_Credit_Hour = int(input("Please enter the new credit hour : "))
         if 0 < Replaced_Credit_Hour < 10:
+            if Selected_Course_Code not in Stream_1_Code_List + Stream_2_Code_List + Stream_3_Code_List:
+                print('Invalid Code ! Please check again the name you key in (CAPS is important)')
+                Credit_Hour()
             if Selected_Course_Code in Core_Course_Code:
                 Core_Course_Code[Core_Course_Code.index(Selected_Course_Code)] = \
                     (Core_Course_Code[Core_Course_Code.index(Selected_Course_Code)][0:7]) + str(Replaced_Credit_Hour)
@@ -87,9 +91,6 @@ def Credit_Hour():
                         Replaced_Credit_Hour)
                 print("\nDone")
                 time.sleep(0.5)
-            else:
-                print('Invalid Code ! Please check again the name you key in (CAPS is important)')
-                Credit_Hour()
             staff()
         else:
             print("Value should be between 1 ~ 9 only ! ")
@@ -99,24 +100,28 @@ def Credit_Hour():
 
 def Students_Details():
     New_Student_ID = input("Enter the new student's ID : ")
-    while len(New_Student_ID) != 7:
-        print("Invalid ID ! (Exp: 2103301) ")
-        New_Student_ID = input("Enter the new student's ID : ")
-    New_Student_Name = input("Enter the new student's name : ")
-    try:
-        New_Student_Stream = input("Enter the new student's stream : ")
-    except ValueError:
-        print("That isn't an integer ! ")
-        New_Student_Stream = 1
-        Students_Details()
-    print("Stream =", New_Student_Stream)
-    while New_Student_Stream not in Stream_List:
-        print("There is only 3 Stream currently (1, 2 or 3) ! ")
-        New_Student_Stream = input("Enter the new student's stream : ")
-    ID_List.append(New_Student_ID)
-    Name_List.append(New_Student_Name)
-    Stream_List.append(str(New_Student_Stream))
-    staff()
+    if New_Student_ID not in ID_List:
+        while len(New_Student_ID) != 7:
+            print("Invalid ID ! (Exp: 2103301) ")
+            New_Student_ID = input("Enter the new student's ID : ")
+        New_Student_Name = input("Enter the new student's name : ")
+        try:
+            New_Student_Stream = input("Enter the new student's stream : ")
+        except ValueError:
+            print("That isn't an integer ! ")
+            New_Student_Stream = 1
+            Students_Details()
+        while New_Student_Stream not in Stream_List:
+            print("There is only 3 Stream currently (1, 2 or 3) ! ")
+            New_Student_Stream = input("Enter the new student's stream : ")
+        ID_List.append(New_Student_ID)
+        Name_List.append(New_Student_Name)
+        Stream_List.append(str(New_Student_Stream))
+        print("\nDone")
+        staff()
+    else:
+        print("Student ID is already in database")
+        staff()
 
 
 def Students_Results():
@@ -328,9 +333,12 @@ def check():
     while ID not in ID_List:  # Check whether this user's data is available or not
         if ID == '1234567':
             staff()
+        elif ID == '0':
+            print('\nThank you for using me, hope you have a great day ! ')
+            quit()
         else:
             print("User ID can't be found in the database, please try again")
-            ID = input("Please key in your Student ID (Exp: 2103301) : ")
+            ID = input("Please key in your Student ID (Exp: 2103301) [Enter '0' to quit] : ")
     List_Position = ID_List.index(str(ID))  # Finding ID in the list and the index(position) of it in all list
     Name = Name_List[List_Position]
     Stream = Stream_List[List_Position]
