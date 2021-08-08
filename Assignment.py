@@ -217,7 +217,7 @@ def Grade():
     while Input_Grade_Course_Code != '0':
         if Input_Grade_Course_Code in Core_Course_Code + Student_Stream_Code:  # Combine Core and Elective Course
             if Input_Grade_Course_Code not in Grade_Course_Code:
-                Input_Grade_Grades = input('Enter grade (Exp: A+, B, C, F) : ').upper()
+                Input_Grade_Grades = input('Enter grade (A+, A-, B+, B, B-, C+, C, F) : ').upper()
                 Grade_Course_Code.append(Input_Grade_Course_Code)
                 Grade_Grades.append(Input_Grade_Grades)
                 Grade_Course_Stream_Position = (Core_Course_Code + Student_Stream_Code).index(Input_Grade_Course_Code)
