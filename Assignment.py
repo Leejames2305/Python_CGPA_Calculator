@@ -33,7 +33,7 @@ def Course_Name():
         Selected_Course_Code = input("Please enter the Course Code of the course you want to update its name : ")
         Replaced_Course_Name = input("Please enter the new name : ")
         if Selected_Course_Code not in Core_Course_Code + Stream_1_Code_List + Stream_2_Code_List + Stream_3_Code_List:
-            print('Invalid Code ! Please check again the name you key in (CAPS is important)')
+            print('Invalid Code ! Please check again the code you key in (CAPS is important)')
             Course_Name()
         if Selected_Course_Code in Core_Course_Code:
             Core_Course_List[Core_Course_Code.index(Selected_Course_Code)] = Replaced_Course_Name
@@ -65,7 +65,7 @@ def Credit_Hour():
         Replaced_Credit_Hour = int(input("Please enter the new credit hour : "))
         if 0 < Replaced_Credit_Hour < 10:
             if Selected_Course_Code not in Stream_1_Code_List + Stream_2_Code_List + Stream_3_Code_List:
-                print('Invalid Code ! Please check again the name you key in (CAPS is important)')
+                print('Invalid Code ! Please check again the code you key in (CAPS is important)')
                 Credit_Hour()
             if Selected_Course_Code in Core_Course_Code:
                 Core_Course_Code[Core_Course_Code.index(Selected_Course_Code)] = \
@@ -182,7 +182,7 @@ def staff():
     elif select_2 == '6':
         List_All_Students()
     else:
-        print('Please enter the options from 1 ~ 5 only')
+        print('Please enter the options from 1 ~ 6 only')
         staff()
 
 
