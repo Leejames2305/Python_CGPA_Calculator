@@ -100,10 +100,13 @@ def Credit_Hour():
 
 def Students_Details():
     New_Student_ID = input("Enter the new student's ID : ")
+    while New_Student_ID == '1234567':
+        print("That's Staff account ID, you can't register with that ID")
+        New_Student_ID = input("Enter the new student's ID : ")
+    while len(New_Student_ID) != 7:
+        print("Invalid ID ! (Exp: 2103301) ")
+        New_Student_ID = input("Enter the new student's ID : ")
     if New_Student_ID not in ID_List:
-        while len(New_Student_ID) != 7:
-            print("Invalid ID ! (Exp: 2103301) ")
-            New_Student_ID = input("Enter the new student's ID : ")
         New_Student_Name = input("Enter the new student's name : ")
         try:
             New_Student_Stream = input("Enter the new student's stream : ")
