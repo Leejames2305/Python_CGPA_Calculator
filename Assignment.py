@@ -291,6 +291,9 @@ def Other():
 
 
 def student():
+    global Grade_Course_Code
+    global Grade_Course_Stream
+    global Grade_Grades
     print("\nStudent's ID = ", ID)
     print("Name = ", Name)
     print("Stream", Stream)
@@ -302,6 +305,9 @@ def student():
     select_1 = input("\nSelect the service you required from the list above : ")
     if select_1 == '0':
         print('\nLogging Out .... ')
+        Grade_Course_Code = []
+        Grade_Grades = []
+        Grade_Course_Stream = []
         login()
     elif select_1 == '1':
         Course()
