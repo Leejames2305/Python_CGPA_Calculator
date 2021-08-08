@@ -227,7 +227,7 @@ def Grade():
                 Update_Grade = input('Do you want to update the grade ? (Y/N) : ').upper()
                 if Update_Grade == 'Y':
                     Overwrite_Course_List_Position = Grade_Course_Code.index(Input_Grade_Course_Code)
-                    Overwrite_Grade = input('Enter grade (Exp: A+, B, C, F) : ')
+                    Overwrite_Grade = input('Enter grade (A+, A-, B+, B, B-, C+, C, F) : ')
                     Grade_Grades[Overwrite_Course_List_Position] = Overwrite_Grade
             Input_Grade_Course_Code = input("\nEnter the course code (Enter '0' to Exit) : ")
         else:
