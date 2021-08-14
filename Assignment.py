@@ -2,14 +2,14 @@ import time
 
 
 # -------------------------------------------------STAFF----------------------------------------------------------
-def Course_Name():
+def Course_Name():  # Allow change in Course Name, , the '\' is used because single line too long
     Code_Or_Name = input("Would you like update the Course name based on Course Name(NAME)"
                          " or Course Code(CODE) ? ").upper()
-    if Code_Or_Name == 'NAME':
+    if Code_Or_Name == 'NAME':  # Use course name to identify which one to replace
         Selected_Course_Name = input("Please enter the Course Name you want to update : ")
         Replaced_Course_Name = input("Please enter the new name : ")
         if Selected_Course_Name not in Core_Course_List + Stream_1_Course_List + Stream_2_Course_List \
-                + Stream_3_Course_List:
+                + Stream_3_Course_List:  # Check whether the name is in system or not
             print('Invalid Course Name ! Please check again the name you key in (CAPS is important)')
             Course_Name()
         if Selected_Course_Name in Core_Course_List:
@@ -29,7 +29,7 @@ def Course_Name():
             print("\nDone")
             time.sleep(0.5)
         staff()
-    elif Code_Or_Name == 'CODE':
+    elif Code_Or_Name == 'CODE':  # Use course code to identify which one to replace
         Selected_Course_Code = input("Please enter the Course Code of the course you want to update its name : ")
         Replaced_Course_Name = input("Please enter the new name : ")
         if Selected_Course_Code not in Core_Course_Code + Stream_1_Code_List + Stream_2_Code_List + Stream_3_Code_List:
@@ -59,13 +59,13 @@ def Course_Name():
         Course_Name()
 
 
-def Credit_Hour():
+def Credit_Hour():  # Update any course in the system with new Credit Hour / last digits
     Selected_Course_Code = input("Please enter the Course Code of the course you want to update its credit hour : ")
     try:
         Replaced_Credit_Hour = int(input("Please enter the new credit hour : "))
         if 0 < Replaced_Credit_Hour < 10:
-            if Selected_Course_Code not in Core_Course_Code + Stream_1_Code_List + \
-                    Stream_2_Code_List + Stream_3_Code_List:
+            if Selected_Course_Code not in Core_Course_Code + Stream_1_Code_List + Stream_2_Code_List \
+                    + Stream_3_Code_List:
                 print('Invalid Code ! Please check again the code you key in (CAPS is important)')
                 Credit_Hour()
             if Selected_Course_Code in Core_Course_Code:
@@ -99,12 +99,12 @@ def Credit_Hour():
         print("That isn't an integer")
 
 
-def Students_Details():
+def Students_Details():  # Insert new students, prevent repeating IDs
     New_Student_ID = input("Enter the new student's ID : ")
-    while New_Student_ID == '1234567':
+    while New_Student_ID == '1234567':  # Prevent staff ID used as Student ID
         print("That's Staff account ID, you can't register with that ID")
         New_Student_ID = input("Enter the new student's ID : ")
-    while len(New_Student_ID) != 7:
+    while len(New_Student_ID) != 7:  # All the ID must be 7 digit length
         print("Invalid ID ! (Exp: 2103301) ")
         New_Student_ID = input("Enter the new student's ID : ")
     if New_Student_ID not in ID_List:
@@ -123,17 +123,18 @@ def Students_Details():
         Stream_List.append(str(New_Student_Stream))
         print("\nDone")
         staff()
-    else:
+    else:  # Prevent repeat of same IDs in list
         print("Student ID is already in database")
         staff()
 
 
+# Using list to store each students results is too long, and none of us are not familiar with store as json method
 def Students_Results():
     print("\nUpdate Students' results is currently not available")
     staff()
 
 
-def List_All_Course():
+def List_All_Course():  # List down all the courses recorded in the system
     print("\nCore Course")
     print("Code        Course Name")
     print("--------------------------------------------------------")
@@ -155,13 +156,13 @@ def List_All_Course():
     staff()
 
 
-def List_All_Students():
+def List_All_Students():  # List down all recorded student details
     print("All Students' Name : ", Name_List)
     print("All Students' ID : ", ID_List)
     print("All Students' Stream : ", Stream_List)
 
 
-def staff():
+def staff():  # Staff's functions
     print("\n1. Update Course Name")
     print("2. Update Credit Hours")
     print("3. Import Students Details")
@@ -202,7 +203,7 @@ def Course():
     print("--------------------------------------------------------")
     for i in range(1, len(Student_Stream_Course) + 1, 1):
         print(*Student_Stream_Code[i - 1:i], "  ", *Student_Stream_Course[i - 1:i])
-    input('\nPress Enter to continue')
+    input('\nPress "Enter" to continue')
     student()
 
 
@@ -229,7 +230,7 @@ def Grade():
             else:
                 print('This course Grade is already recorded in the system . ')
                 Update_Grade = input('Do you want to update the grade ? (Y/N) : ').upper()
-                if Update_Grade == 'Y':
+                if Update_Grade == 'Y':  # Invalid grade will be checked in Results(), or else too long
                     Overwrite_Course_List_Position = Grade_Course_Code.index(Input_Grade_Course_Code)
                     Overwrite_Grade = input('Enter grade (A+, A-, B+, B, B-, C+, C, F) : ')
                     Grade_Grades[Overwrite_Course_List_Position] = Overwrite_Grade
@@ -243,8 +244,8 @@ def Grade():
     student()
 
 
-def Results():
-    if Grade_Course_Code:
+def Results():  # Show all results and CGPA values after input in Grade() is true
+    if Grade_Course_Code:  # if Grade_Course_Code isn't empty
         Total_Credit_Hour = 0
         Total_Point = 0
         CGPA = 0
@@ -269,7 +270,7 @@ def Results():
                 Total_Point += 2.00
             elif 'F' in Grade_Grades[i - 1:i]:
                 Total_Point += 0.00
-            else:
+            else:  # Invalid grade isn't checked in Grade() so check it here
                 print("\nInvalid Grades detected", "---->", Grade_Grades[i - 1:i])
                 print("Please use the 'Update Grade Function to overwrite it' (Select 2 at main menu) ")
                 time.sleep(1)
@@ -277,9 +278,9 @@ def Results():
             CGPA = Total_Point / i
         print("\nTotal Credit Hour : ", Total_Credit_Hour)
         print("CGPA : ", round(CGPA, 2))
-        input('\nPress Enter to go back to main menu')
+        input('\nPress "Enter" to go back to main menu')
         student()
-    else:
+    else:  # Won't calculate / show anything if there is no results recorded
         print('\nThere is no grades being recorded')
         input('Press "Enter" to go back to main menu')
         student()
@@ -291,7 +292,7 @@ def Other():
     student()
 
 
-def student():
+def student():  # Student's functions
     global Grade_Course_Code
     global Grade_Course_Stream
     global Grade_Grades
@@ -334,17 +335,17 @@ def login():
         check()
 
 
-def check():
-    global ID
+def check():  # Check IDs, determine correct list accordingly
+    global ID  # Allow lists outside of self-define func can be refer or modified
     global Name
     global Stream
     global List_Position
     global Student_Stream_Code
     global Student_Stream_Course
     while ID not in ID_List:  # Check whether this user's data is available or not
-        if ID == '1234567':
+        if ID == '1234567':  # if staff ID is confirmed, give access to staff function
             staff()
-        elif ID == '0':
+        elif ID == '0':  # A bruteforce way to prevent login() missed the '0' to quit()
             print('\nThank you for using me, hope you have a great day ! ')
             time.sleep(1.5)
             quit()
