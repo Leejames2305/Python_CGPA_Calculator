@@ -64,7 +64,8 @@ def Credit_Hour():
     try:
         Replaced_Credit_Hour = int(input("Please enter the new credit hour : "))
         if 0 < Replaced_Credit_Hour < 10:
-            if Selected_Course_Code not in Stream_1_Code_List + Stream_2_Code_List + Stream_3_Code_List:
+            if Selected_Course_Code not in Core_Course_Code + Stream_1_Code_List + \
+                    Stream_2_Code_List + Stream_3_Code_List:
                 print('Invalid Code ! Please check again the code you key in (CAPS is important)')
                 Credit_Hour()
             if Selected_Course_Code in Core_Course_Code:
