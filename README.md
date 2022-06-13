@@ -1,5 +1,5 @@
 # CGPA Calculator
-This isn't designed for general public usage.
+This isn't designed to be used by general public.
 
 Please stay away from this.
 
