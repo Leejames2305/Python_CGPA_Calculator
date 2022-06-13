@@ -1,5 +1,5 @@
-# UTAR CGPA Calculator
-For UTAR Foundation in Science Y1S1 Assignment
+# CGPA Calculator
+This isn't designed for general public usage.
 
 # Info
 Default User IDs are : 2103301, 2103302, 2103303 
